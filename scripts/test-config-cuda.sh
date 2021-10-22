@@ -21,30 +21,30 @@ then
   TEST_FAIL=true
 fi
 # nvblas
-if ! NVBLAS_OUTPUT=$(Rscript ../tests/gpu/misc/nvblas.R 2>&1);
-then
-  echo "Failed nvBLAS test with error $NVBLAS_OUTPUT" | tee -a $LOG_LOC
-  TEST_FAIL=true
-fi
+#if ! NVBLAS_OUTPUT=$(Rscript ../tests/gpu/misc/nvblas.R 2>&1);
+#then
+#  echo "Failed nvBLAS test with error $NVBLAS_OUTPUT" | tee -a $LOG_LOC
+#  TEST_FAIL=true
+#fi
 # tensorflow
-if ! TF_OUTPUT=$(Rscript ../tests/gpu/misc/examples_tf.R 2>&1);
-then
-  echo "Failed tensorflow test with error $TF_OUTPUT" | tee -a $LOG_LOC
-  TEST_FAIL=true
-else
-  GPU_STR="device:GPU:0"
-  if [[ "$TF_OUTPUT" == *"$GPU_STR"* ]]
-  then
-    echo "tensorflow GPU test succeeded" | tee -a $LOG_LOC
-    echo "output in the log" | tee -a $LOG_LOC
-    echo "$TF_OUTPUT" >> $LOG_LOC
-  else
-    echo "CPU tensorflow test succeeded" | tee -a $LOG_LOC
-    echo "Failed GPU tensorflow test. See log for details." | tee -a $LOG_LOC
-    echo "$TF_OUTPUT" >> $LOG_LOC
-    TEST_FAIL=true
-  fi
-fi
+#if ! TF_OUTPUT=$(Rscript ../tests/gpu/misc/examples_tf.R 2>&1);
+#then
+#  echo "Failed tensorflow test with error $TF_OUTPUT" | tee -a $LOG_LOC
+#  TEST_FAIL=true
+#else
+#  GPU_STR="device:GPU:0"
+#  if [[ "$TF_OUTPUT" == *"$GPU_STR"* ]]
+#  then
+#    echo "tensorflow GPU test succeeded" | tee -a $LOG_LOC
+#    echo "output in the log" | tee -a $LOG_LOC
+#    echo "$TF_OUTPUT" >> $LOG_LOC
+#  else
+#    echo "CPU tensorflow test succeeded" | tee -a $LOG_LOC
+#    echo "Failed GPU tensorflow test. See log for details." | tee -a $LOG_LOC
+#    echo "$TF_OUTPUT" >> $LOG_LOC
+#    TEST_FAIL=true
+#  fi
+#fi
 
 if [ "$TEST_FAIL" = true ]
 then
